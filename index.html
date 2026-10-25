@@ -2,185 +2,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DON'T OPEN THE LINK</title>
-
-<style>
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #008080;
-  font-family: Tahoma, Arial, sans-serif;
-  color: #111;
-}
-
-.desktop {
-  min-height: 100vh;
-  padding: 20px;
-  padding-bottom: 60px;
-  background: linear-gradient(135deg, #087b78, #004c4c);
-}
-
-.window {
-  width: 350px;
-  max-width: 100%;
-  margin: 20px auto;
-  background: #c0c0c0;
-  border: 3px solid;
-  border-color: white #444 #444 white;
-  box-shadow: 3px 3px #222;
-  padding: 4px;
-}
-
-.titlebar {
-  background: navy;
-  color: white;
-  padding: 7px;
-  font-weight: bold;
-}
-
-.content {
-  padding: 12px;
-}
-
-#chat {
-  background: white;
-  border: 2px inset #eee;
-  height: 220px;
-  overflow-y: auto;
-  padding: 8px;
-  font: 13px monospace;
-  overflow-wrap: anywhere;
-}
-
-input {
-  width: 65%;
-  padding: 7px;
-}
-
-button {
-  padding: 7px 10px;
-  cursor: pointer;
-  background: #c0c0c0;
-  border: 2px solid;
-  border-color: white #444 #444 white;
-}
-
-button:active {
-  border-color: #444 white white #444;
-}
-
-#game {
-  display: none;
-  text-align: center;
-}
-
-#scene {
-  min-height: 280px;
-  background: #b8f5d9;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  transition: background .5s;
-}
-
-#scene.dark {
-  background: #101014;
-  color: white;
-}
-
-#bunny {
-  font-size: 65px;
-}
-
-#actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-#jumpscare {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: black;
-  color: red;
-  z-index: 99;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-#jumpscare.show {
-  display: flex;
-  animation: flash .08s steps(2) infinite;
-}
-
-#face {
-  font-size: min(50vw, 280px);
-  filter: grayscale(1) contrast(2);
-}
-
-#scareText {
-  font: bold 30px monospace;
-}
-
-@keyframes flash {
-  0% { background: black; }
-  50% { background: #700000; }
-  100% { background: black; }
-}
-
-#ending {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  background: black;
-  color: #ddd;
-  text-align: center;
-  padding: 25px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-#ending h1 {
-  color: darkred;
-}
-
-.taskbar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #c0c0c0;
-  border-top: 2px solid white;
-  padding: 5px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 10;
-}
-
-@media (max-width: 500px) {
-  .desktop {
-    padding: 8px;
-    padding-bottom: 55px;
-  }
-
-  #scene {
-    min-height: 250px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DON'T OPEN THE LINK</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -191,10 +16,7 @@ button:active {
   </div>
 
   <div class="window" id="chatWindow">
-    <div class="titlebar">
-      💬 Mensagens — desconhecido
-    </div>
-
+    <div class="titlebar">💬 Mensagens — desconhecido</div>
     <div class="content">
       <div id="chat"></div>
 
@@ -208,10 +30,7 @@ button:active {
   </div>
 
   <div class="window" id="game">
-    <div class="titlebar">
-      🌈 HAPPY_PLACE.exe
-    </div>
-
+    <div class="titlebar">🌈 HAPPY_PLACE.exe</div>
     <div class="content">
       <div id="scene">
         <div id="bunny">🐰</div>
@@ -223,7 +42,6 @@ button:active {
           <button id="play">JOGAR ♡</button>
         </div>
       </div>
-
       <p id="status">Tudo está bem!</p>
     </div>
   </div>
@@ -243,9 +61,7 @@ button:active {
 
 <div id="ending">
   <h1>CONEXÃO ENCERRADA</h1>
-  <p id="endingMessage">
-    unknown_404 ficou offline.
-  </p>
+  <p id="endingMessage">unknown_404 ficou offline.</p>
   <p>Não era para você encontrar esta versão.</p>
   <button onclick="location.reload()">JOGAR NOVAMENTE</button>
 </div>
@@ -287,6 +103,7 @@ function sound(frequency = 100, duration = 0.5) {
     gain.connect(audioContext.destination);
 
     oscillator.start();
+
     gain.gain.exponentialRampToValueAtTime(
       0.001,
       audioContext.currentTime + duration
@@ -298,7 +115,10 @@ function sound(frequency = 100, duration = 0.5) {
 
 function showGame() {
   $("game").style.display = "block";
-  $("game").scrollIntoView({ behavior: "smooth", block: "center" });
+  $("game").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
 }
 
 function setScene(title, description, bunny, dark = false) {
@@ -322,7 +142,6 @@ function scare(text, face = "☻", duration = 1000) {
   $("jumpscare").classList.add("show");
 
   sound(45, 0.65);
-
   setTimeout(() => sound(75, 0.3), 100);
 
   setTimeout(() => {
@@ -404,6 +223,7 @@ function errorScene() {
   message("unknown_404", "FECHA A JANELA. AGORA.");
 
   option("Fechar o jogo", ending);
+
   option("Continuar", () => {
     scare("VOCÊ FICOU.", "☻", 900);
     setTimeout(errorScene, 1200);
@@ -443,14 +263,16 @@ $("chatForm").addEventListener("submit", event => {
 
   setTimeout(() => {
     if (stage >= 2) {
-      message("unknown_404", "ela consegue ler o que você escreve.");
+      message(
+        "unknown_404",
+        "ela consegue ler o que você escreve."
+      );
     } else {
       message("unknown_404", "kkkk abre o jogo primeiro");
     }
   }, 500);
 });
 
-// O estranho envia as mensagens iniciais.
 const intro = [
   ["unknown_404", "oi"],
   ["unknown_404", "vc tá ocupado?"],
@@ -474,15 +296,14 @@ setTimeout(() => {
   link.textContent = "ABRIR HAPPY_PLACE.exe";
   link.style.marginTop = "8px";
 
-  link.onclick = () => {
+  link.addEventListener("click", () => {
     showGame();
     message("Sistema", "HAPPY_PLACE.exe foi iniciado.");
-  };
+  });
 
   $("chat").appendChild(link);
 }, 5000);
 
-// Relógio da barra de tarefas.
 setInterval(() => {
   $("clock").textContent = new Date().toLocaleTimeString(
     "pt-BR",
